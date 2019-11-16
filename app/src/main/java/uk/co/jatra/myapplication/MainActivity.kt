@@ -1,18 +1,13 @@
 package uk.co.jatra.myapplication
 
 import android.R.color.holo_green_dark
-import android.content.Context
 import android.os.Bundle
 import android.text.SpannableStringBuilder
-import android.text.style.ForegroundColorSpan
-import android.text.style.TextAppearanceSpan
-import androidx.annotation.ColorRes
-import androidx.annotation.StyleRes
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
 import androidx.core.text.*
 import kotlinx.android.synthetic.main.activity_main.*
+import uk.co.jatra.ui.*
 
 const val GREEN = holo_green_dark
 const val GREY = android.R.color.darker_gray
@@ -46,32 +41,24 @@ class MainActivity : AppCompatActivity() {
             .style(this, HEADLINE) { append("headline") }
             .lineBreak()
             .color(green) { style(this@MainActivity, HEADLINE) { append("green headline") } }
+            .lineBreak()
+            .colorSecondary(this) { append("secondary") }
 
 
 
         textview2.text = SpannableStringBuilder()
-            .color(this, holo_green_dark) { append("$120.00") }
+            .colorPrimary(this) { append("$120.00") }
             .space()
             .color(grey) { strikeThrough { append("$140.00") } }
+
+        textview3.text = SpannableStringBuilder()
+            .colorPrimary(this) { append("$120.00") }
+            .space()
+            .struckThrough(this) { append("$140.00") }
 
     }
 }
 
-fun SpannableStringBuilder.lineBreak() = append('\n')
-fun SpannableStringBuilder.space() = append(' ')
-fun SpannableStringBuilder.nbspace() = append('\u00A0')
 
-inline fun SpannableStringBuilder.style(
-    context: Context,
-    @StyleRes style: Int,
-    builderAction: SpannableStringBuilder.() -> Unit
-) = inSpans(TextAppearanceSpan(context, style), builderAction = builderAction)
 
-inline fun SpannableStringBuilder.color(
-    context: Context,
-    @ColorRes color: Int,
-    builderAction: SpannableStringBuilder.() -> Unit
-) = inSpans(
-    ForegroundColorSpan(ContextCompat.getColor(context, color)),
-    builderAction = builderAction
-)
+
