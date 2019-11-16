@@ -57,4 +57,3 @@ inline fun SpannableStringBuilder.struckThrough(
         builderAction = { color(context, STRUCK_THROUGH_COLOR) { builderAction() } }
     )
 }
-

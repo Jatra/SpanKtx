@@ -56,8 +56,18 @@ class MainActivity : AppCompatActivity() {
             .space()
             .struckThrough(this) { append("$140.00") }
 
+        textview4.text = StyledText()
+            .strikeThrough { append("Styled Text") }
+            .space()
+            .bold { append("bolded") }
+
     }
+
 }
+
+//Is this worth it?
+typealias StyledText = SpannableStringBuilder
+
 
 
 
