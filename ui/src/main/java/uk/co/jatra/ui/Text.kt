@@ -14,10 +14,21 @@ import androidx.core.text.inSpans
 
 const val STRUCK_THROUGH_COLOR = android.R.color.darker_gray
 
-
-fun SpannableStringBuilder.lineBreak() = append('\n')
-fun SpannableStringBuilder.space() = append(' ')
-fun SpannableStringBuilder.nbspace() = append('\u00A0')
+val SpannableStringBuilder.space: SpannableStringBuilder
+    get() {
+        this.append(' ')
+        return this
+    }
+val SpannableStringBuilder.nbspace: SpannableStringBuilder
+    get() {
+        this.append('\u00A0')
+        return this
+    }
+val SpannableStringBuilder.newline: SpannableStringBuilder
+    get() {
+        this.append('\n')
+        return this
+    }
 
 inline fun SpannableStringBuilder.style(
     context: Context,
@@ -72,19 +83,3 @@ fun styled(builderAction: SpannableStringBuilder.() -> Unit): SpannableStringBui
     return ssb
 }
 
-
-val SpannableStringBuilder.space: SpannableStringBuilder
-    get() {
-        this.append(' ')
-        return this
-    }
-val SpannableStringBuilder.nbspace: SpannableStringBuilder
-    get() {
-        this.append('\u00A0')
-        return this
-    }
-val SpannableStringBuilder.newline: SpannableStringBuilder
-    get() {
-        this.append('\n')
-        return this
-    }
