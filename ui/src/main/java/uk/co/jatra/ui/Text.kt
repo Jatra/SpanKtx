@@ -1,9 +1,11 @@
 package uk.co.jatra.ui
 
 import android.content.Context
+import android.graphics.Typeface
 import android.text.SpannableStringBuilder
 import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
+import android.text.style.StyleSpan
 import android.text.style.TextAppearanceSpan
 import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
@@ -57,3 +59,32 @@ inline fun SpannableStringBuilder.struckThrough(
         builderAction = { color(context, STRUCK_THROUGH_COLOR) { builderAction() } }
     )
 }
+
+fun SpannableStringBuilder.embolden(text: CharSequence): SpannableStringBuilder =
+    inSpans(StyleSpan(Typeface.BOLD)) { append(text) }
+
+fun SpannableStringBuilder.strikeThrough(text: CharSequence): SpannableStringBuilder =
+    inSpans(StrikethroughSpan()) { append(text) }
+
+fun styled(builderAction: SpannableStringBuilder.() -> Unit): SpannableStringBuilder {
+    val ssb = SpannableStringBuilder()
+    ssb.inSpans(ssb, builderAction = builderAction)
+    return ssb
+}
+
+
+val SpannableStringBuilder.space: SpannableStringBuilder
+    get() {
+        this.append(' ')
+        return this
+    }
+val SpannableStringBuilder.nbspace: SpannableStringBuilder
+    get() {
+        this.append('\u00A0')
+        return this
+    }
+val SpannableStringBuilder.newline: SpannableStringBuilder
+    get() {
+        this.append('\n')
+        return this
+    }

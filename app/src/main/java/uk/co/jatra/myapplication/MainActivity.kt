@@ -23,50 +23,56 @@ class MainActivity : AppCompatActivity() {
         val grey = getColor(this, GREY)
         textview.text = SpannableStringBuilder()
             .color(green) { append("Green text") }
-            .space()
+            .space
             .superscript { append("superscript") }
-            .space()
+            .space
             .append("Normal text")
-            .space()
+            .space
             .strikeThrough { append("strikethrough") }
-            .nbspace()
+            .nbspace
             .subscript { append("subscript") }
-            .space()
+            .space
             .scale(0.5f) { append("Text at half size") }
-            .space()
+            .space
             .backgroundColor(green) { append("Background green") }
-            .space()
+            .space
             .bold { underline { italic { strikeThrough { append("Bold and underlined italic strikethrough") } } } }
-            .lineBreak()
+            .newline
             .style(this, HEADLINE) { append("headline") }
-            .lineBreak()
+            .newline
             .color(green) { style(this@MainActivity, HEADLINE) { append("green headline") } }
-            .lineBreak()
+            .newline
             .colorSecondary(this) { append("secondary") }
 
 
 
         textview2.text = SpannableStringBuilder()
             .colorPrimary(this) { append("$120.00") }
-            .space()
+            .space
             .color(grey) { strikeThrough { append("$140.00") } }
 
         textview3.text = SpannableStringBuilder()
             .colorPrimary(this) { append("$120.00") }
-            .space()
+            .space
             .struckThrough(this) { append("$140.00") }
 
-        textview4.text = StyledText()
-            .strikeThrough { append("Styled Text") }
-            .space()
-            .bold { append("bolded") }
 
+        textview4.text = styled {
+            //a sequence of operations on "this"
+            //all of them are either explicitly or implicitly calling append
+            embolden("bolded")
+            nbspace
+            strikeThrough("one")
+            space
+            embolden("bold")
+            space
+            append("E")
+            append("N")
+            append("D")
+        }
     }
 
 }
-
-//Is this worth it?
-typealias StyledText = SpannableStringBuilder
 
 
 
