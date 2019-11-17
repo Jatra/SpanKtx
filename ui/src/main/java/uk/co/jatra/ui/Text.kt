@@ -7,6 +7,7 @@ import android.text.style.ForegroundColorSpan
 import android.text.style.StrikethroughSpan
 import android.text.style.StyleSpan
 import android.text.style.TextAppearanceSpan
+import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.StyleRes
 import androidx.core.content.ContextCompat
@@ -61,6 +62,8 @@ inline fun SpannableStringBuilder.colorSecondary(
     builderAction = builderAction
 )
 
+
+//Dubious - assuming struckThrough also means a specific colour.
 inline fun SpannableStringBuilder.struckThrough(
     context: Context,
     crossinline builderAction: SpannableStringBuilder.() -> Unit
@@ -71,11 +74,30 @@ inline fun SpannableStringBuilder.struckThrough(
     )
 }
 
-fun SpannableStringBuilder.embolden(text: CharSequence): SpannableStringBuilder =
+fun SpannableStringBuilder.bolded(text: CharSequence): SpannableStringBuilder =
     inSpans(StyleSpan(Typeface.BOLD)) { append(text) }
 
 fun SpannableStringBuilder.strikeThrough(text: CharSequence): SpannableStringBuilder =
     inSpans(StrikethroughSpan()) { append(text) }
+
+fun SpannableStringBuilder.colored(
+    context: Context,
+    @ColorRes color: Int,
+    text: CharSequence
+) {
+    inSpans(
+        ForegroundColorSpan(ContextCompat.getColor(context, color))
+    ) { append(text) }
+}
+
+fun SpannableStringBuilder.colored(
+    @ColorInt color: Int,
+    text: CharSequence
+) {
+    inSpans(
+        ForegroundColorSpan(color)
+    ) { append(text) }
+}
 
 fun styled(builderAction: SpannableStringBuilder.() -> Unit): SpannableStringBuilder {
     val ssb = SpannableStringBuilder()

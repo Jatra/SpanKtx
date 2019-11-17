@@ -38,9 +38,9 @@ class MainActivity : AppCompatActivity() {
             .space
             .bold { underline { italic { strikeThrough { append("Bold and underlined italic strikethrough") } } } }
             .newline
-            .style(this, HEADLINE) { append("headline") }
+            .style(this, HEADLINE) { append("HEADLINE") }
             .newline
-            .color(green) { style(this@MainActivity, HEADLINE) { append("green headline") } }
+            .color(green) { style(this@MainActivity, HEADLINE) { append("GREEN HEADLINE") } }
             .newline
             .colorSecondary(this) { append("secondary") }
 
@@ -51,30 +51,61 @@ class MainActivity : AppCompatActivity() {
             .space
             .color(grey) { strikeThrough { append("$140.00") } }
 
+        //Not used. I don't like struckThrough implicitly seeing the colour
         textview3.text = SpannableStringBuilder()
             .colorPrimary(this) { append("$120.00") }
             .space
             .struckThrough(this) { append("$140.00") }
 
 
-        textview4.text = styled {
+        textview3.text = styled {
             //a sequence of operations on "this"
             //all of them are either explicitly or implicitly calling append
-            embolden("bolded")
+            bolded("bolded")
             nbspace
             strikeThrough("one")
             space
-            embolden("bold")
+            bold {
+                //Note this is using the ktx function that returns a SpannableStringBuilder
+                strikeThrough("$140.00")
+            }
             space
             append("E")
             append("N")
             append("D")
+            colored(this@MainActivity, R.color.colorAccent, "!!")
+            newline
+            colored(green, "color ready resolved")
+            bolded("!!")
+        }
+
+
+        /*
+        styleBuilder allows a context to be passed in.
+        This is useful where the actions require access to resources,
+        such as color definitions
+         */
+
+        textview4.text = styleBuilder(this) {
+            colorPrimary("$120.00")
+            space
+            bold {
+                strikeThrough("$140.00")
+            }
+            space
+            color(R.color.colorAccent, "of course")
+        }
+
+        textview5.text = styleBuilder(this) {
+            bold("bolded")
+            space
+            colorPrimary("$120.00")
+            space
+            strikeThrough("$140.00")
         }
     }
 
 }
-
-
 
 
 
