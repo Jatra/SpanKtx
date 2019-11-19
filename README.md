@@ -10,21 +10,27 @@ Some are illustrated here, plus some more extension functions to make it even mo
 val colorPrimary = ContextCompat.getColor(this, R.color.colorPrimary)
 
         textview3.text = styled {
-            bolded("bolded")
+            underline {
+                style(this@MainActivity, R.style.TextAppearance_AppCompat_Headline, "Using Styled")
+            }
+            newline
+            italic("italic")
+            space
+            bold("bolded")
             nbspace
             strikeThrough("one")
             space
             bold {
-                //Note this is using the ktx function that returns a SpannableStringBuilder
                 strikeThrough("$140.00")
             }
             space
             append("E")
-            append("N")
+            bold { append("N") }
             append("D")
-            colored(this@MainActivity, R.color.colorAccent, "!!")
             newline
-            colored(colorPrimary, "color ready resolved")
-            bolded("!!")
+            color(this@MainActivity, R.color.colorAccent, "colour by resource id")
+            newline
+            color(green, "color ready resolved")
+            bold("!!")
         }
 ```
