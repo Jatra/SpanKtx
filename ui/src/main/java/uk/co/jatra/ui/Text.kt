@@ -74,13 +74,24 @@ inline fun SpannableStringBuilder.struckThrough(
     )
 }
 
-fun SpannableStringBuilder.bolded(text: CharSequence): SpannableStringBuilder =
+fun SpannableStringBuilder.bold(text: CharSequence) {
     inSpans(StyleSpan(Typeface.BOLD)) { append(text) }
+}
 
-fun SpannableStringBuilder.strikeThrough(text: CharSequence): SpannableStringBuilder =
+fun SpannableStringBuilder.italic(text: CharSequence) {
+    inSpans(StyleSpan(Typeface.ITALIC)) { append(text) }
+}
+
+
+fun SpannableStringBuilder.style(context: Context, @StyleRes style: Int, text: CharSequence) {
+    inSpans(TextAppearanceSpan(context, style)) { append(text) }
+}
+
+fun SpannableStringBuilder.strikeThrough(text: CharSequence) {
     inSpans(StrikethroughSpan()) { append(text) }
+}
 
-fun SpannableStringBuilder.colored(
+fun SpannableStringBuilder.color(
     context: Context,
     @ColorRes color: Int,
     text: CharSequence
@@ -90,7 +101,7 @@ fun SpannableStringBuilder.colored(
     ) { append(text) }
 }
 
-fun SpannableStringBuilder.colored(
+fun SpannableStringBuilder.color(
     @ColorInt color: Int,
     text: CharSequence
 ) {

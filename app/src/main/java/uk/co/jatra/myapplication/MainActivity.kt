@@ -61,7 +61,13 @@ class MainActivity : AppCompatActivity() {
         textview3.text = styled {
             //a sequence of operations on "this"
             //all of them are either explicitly or implicitly calling append
-            bolded("bolded")
+            underline {
+                style(this@MainActivity, R.style.TextAppearance_AppCompat_Headline, "Using Styled")
+            }
+            newline
+            italic("italic")
+            space
+            bold("bolded")
             nbspace
             strikeThrough("one")
             space
@@ -71,20 +77,21 @@ class MainActivity : AppCompatActivity() {
             }
             space
             append("E")
-            append("N")
+            bold { append("N") }
             append("D")
-            colored(this@MainActivity, R.color.colorAccent, "!!")
             newline
-            colored(green, "color ready resolved")
-            bolded("!!")
+            color(this@MainActivity, R.color.colorAccent, "colour by resource id")
+            newline
+            color(green, "color ready resolved")
+            bold("!!")
         }
 
 
         /*
-        styleBuilder allows a context to be passed in.
-        This is useful where the actions require access to resources,
-        such as color definitions
-         */
+    styleBuilder allows a context to be passed in.
+    This is useful where the actions require access to resources,
+    such as color definitions
+     */
 
         textview4.text = styleBuilder(this) {
             colorPrimary("$120.00")
@@ -102,9 +109,9 @@ class MainActivity : AppCompatActivity() {
             colorPrimary("$120.00")
             space
             strikeThrough("$140.00")
+
         }
     }
-
 }
 
 
