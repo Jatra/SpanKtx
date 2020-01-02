@@ -34,3 +34,4 @@ val colorPrimary = ContextCompat.getColor(this, R.color.colorPrimary)
             bold("!!")
         }
 ```
+![](sample.png)
